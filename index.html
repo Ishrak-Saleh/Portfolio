@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="view-transition" content="same-origin" />
   <title>Portfolio</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <style>
+    /* --- GENERAL STYLES --- */
     @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Dongle&display=swap');
 
     * {
       padding: 0;
@@ -18,12 +18,19 @@
       font-family: 'Poppins', sans-serif;
     }
 
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 80px;
+    }
+
     body {
       width: 100%;
       height: 100vh;
       overflow-x: hidden;
+      background: #1c1c3a;
     }
 
+    /* --- HEADER & NAVIGATION --- */
     header {
       z-index: 1000;
       position: fixed;
@@ -34,9 +41,13 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: transparent;
       transition: background 0.3s, padding 0.3s;
-      flex-wrap: wrap;
+    }
+
+    header.sticky {
+        background-color: #360b3e;
+        padding: 12px 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     }
 
     .brand {
@@ -46,25 +57,61 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       transition: font-size 0.3s;
+      text-decoration: none;
     }
 
     .navigation {
       display: flex;
       gap: 20px;
     }
-
-    .navigation a {
-      text-decoration: none;
-      color: #000;
-      font-weight: bold;
-      transition: color 0.3s;
+    
+    .navigation label {
+      display: block;
+      cursor: pointer;
     }
 
-    .navigation a:hover {
-      color: #fbf5ef;
+    .navigation input[type="radio"] {
+      display: none;
     }
+
+    .navigation .nav-dot {
+      display: block;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #fbf5ef;
+      box-shadow: 0 0 5px rgba(241, 194, 132, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .navigation .nav-dot:hover,
+    .navigation input[type="radio"]:checked + .nav-dot {
+      transform: scale(1.2);
+      box-shadow: 0 0 8px rgba(241, 194, 132, 0.8), 0 0 12px rgba(251, 245, 239, 0.6);
+    }
+    
+    /* --- SECTIONS --- */
+    section {
+        padding: 100px 40px;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(45deg, #272744, #210133, #000000);
+        background-size: 400% 400%;
+        background-attachment: fixed;
+        animation: gradientMove 15s ease infinite;
+    }
+
+    @keyframes gradientMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
     .main .content {
       max-width: 800px;
+      text-align: center;
     }
 
     .main .content h2 {
@@ -78,7 +125,6 @@
       font-size: 2.8rem;
       font-weight: 600;
     }
-
 
     .animated-text {
       position: relative;
@@ -102,22 +148,16 @@
     }
 
     @keyframes text-move {
-      0% { margin-top: 0; }
-      12.66% { margin-top: 0; }
-      17.66% { margin-top: -70px; }
-      29.33% { margin-top: -70px; }
-      34.33% { margin-top: -140px; }
-      46% { margin-top: -140px; }
-      51% { margin-top: -210px; }
-      62.66% { margin-top: -210px; }
-      67.66% { margin-top: -140px; }
-      79.33% { margin-top: -140px; }
-      84.33% { margin-top: -70px; }
-      96% { margin-top: -70px; }
+      0%, 12.66% { margin-top: 0; }
+      17.66%, 29.33% { margin-top: -70px; }
+      34.33%, 46% { margin-top: -140px; }
+      51%, 62.66% { margin-top: -210px; }
+      67.66%, 79.33% { margin-top: -140px; }
+      84.33%, 96% { margin-top: -70px; }
       100% { margin-top: 0; }
     }
 
-
+    /* --- OTHER ELEMENTS --- */
     button {
       font-size: 20px;
       font-weight: bold;
@@ -135,199 +175,251 @@
       transition: box-shadow 0.15s ease, transform 0.15s ease;
     }
 
+    button:hover {
+      animation: glowPulse 1.5s infinite alternate;
+      transform: translateY(-0.02em);
+    }
 
-button:hover {
-  animation: glowPulse 1.5s infinite alternate;
-  transform: translateY(-0.02em);
-}
+    button:active {
+      transform: scale(0.98);
+      animation: none;
+    }
 
-button:active {
-  background: radial-gradient(100% 100% at 100% 0%, #fbf5ef 0%, #c69fa5 100%);
-  color: #272744;                         
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.603);
-  box-shadow: inset 0px 3px 6px #000000e7;  
-  transform: scale(0.98);                 
-  animation: none;                       
-}
-@keyframes glowPulse {
-  0% {
-    box-shadow: 0 0 5px #f2d3ab, 0 0 7px #c69fa5;
-  }
-  50% {
-    box-shadow: 0 0 20px #f2d3ab, 0 0 35px #c69fa5;
-  }
-  100% {
-    box-shadow: 0 0 5px #f2d3ab, 0 0 7px #c69fa5;
-  }
-}
-.media-icons {
-  width: 100%; 
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin-top: 50px;
-}
+    @keyframes glowPulse {
+      from { box-shadow: 0 0 5px #f2d3ab, 0 0 7px #c69fa5; }
+      to { box-shadow: 0 0 10px #f2d3ab, 0 0 25px #c69fa5; }
+    }
 
-.media-icons a {
-  color: #f2d3ab;
-  font-size: 35px;
+    .media-icons {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 50px;
+    }
 
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  border: none;
-  outline: none;
-  background: transparent;
-  text-decoration: none;
-  line-height: 0;
-  vertical-align: middle;
-  transition: all 0.3s ease;
-  box-shadow: none !important; 
-}
-.media-icons a:focus,
-.media-icons a:hover,
-.media-icons a:active {
-  outline: none;
-  box-shadow: none !important;
-  background: transparent;
-}
+    .media-icons a {
+      color: #f2d3ab;
+      font-size: 35px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
 
-@keyframes glowFacebook {
-  0%, 100% { text-shadow: 0 0 8px #5552f8, 0 0 15px #5552f8; }
-  50% { text-shadow: 0 0 20px #5552f8, 0 0 40px #5552f8; }
-}
+    .media-icons a:hover { color: #fff; }
+    .media-icons a.facebook:hover { color: #5552f8; text-shadow: 0 0 8px #5552f8; }
+    .media-icons a.instagram:hover { color: #f841a3; text-shadow: 0 0 8px #f841a3; }
+    .media-icons a.twitter:hover { color: #53b0e2; text-shadow: 0 0 8px #53b0e2; }
+    .media-icons a.github:hover { color: #747bc9; text-shadow: 0 0 8px #747bc9; }
+    
+    /* --- ABOUT SECTION --- */
+    .about .content { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; gap: 40px;}
+    .about .text-content { flex: 1; text-align: left; }
+    .about .image-content { flex: 1; display: flex; justify-content: flex-end;}
+    .about .image-content img { max-width: 100%; height: auto; border-radius: 15px; box-shadow: 0 0 20px #f1c284; }
 
-@keyframes glowInstagram {
-  0%, 100% { text-shadow: 0 0 8px #f841a3, 0 0 15px #f841a3; }
-  50% { text-shadow: 0 0 20px #f841a3, 0 0 40px #f841a3; }
-}
+    /* --- SKILLS SECTION --- */
+    section.skills .content {
+      max-width: 1400px;
+      width: 100%;
+    }
 
-@keyframes glowTwitter {
-  0%, 100% { text-shadow: 0 0 8px #53b0e2, 0 0 15px #53b0e2; }
-  50% { text-shadow: 0 0 20px #53b0e2, 0 0 40px #53b0e2; }
-}
+    section .title {
+        font-size: 2.5em;
+        font-weight: 700;
+        background: linear-gradient(30deg, #f1c284, #fbf5ef);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 40px;
+        text-align: center;
+    }
 
-@keyframes glowGithub {
-  0%, 100% { text-shadow: 0 0 8px #494d7e, 0 0 15px #494d7e; }
-  50% { text-shadow: 0 0 20px #494d7e, 0 0 40px #494d7e; }
-}
+    .skills-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-top: 40px;
+    }
 
+    .skills-column {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
 
-.media-icons a.facebook:hover {
-  color: #5552f8;
-  animation: glowFacebook 1.5s infinite alternate;
-}
+    .skills-column-title {
+      font-size: 1.8em;
+      font-weight: 600;
+      color: #fbf5ef;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
 
-.media-icons a.instagram:hover {
-  color: #f841a3;
-  animation: glowInstagram 1.5s infinite alternate;
-}
+    .skills-column-title i {
+      color: #f1c284;
+      font-size: 1.5em;
+    }
 
-.media-icons a.twitter:hover {
-  color: #53b0e2;
-  animation: glowTwitter 1.5s infinite alternate;
-}
+    .skills-divider {
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #f1c284, #c69fa5 50%, transparent);
+      margin-bottom: 20px;
+    }
 
-.media-icons a.github:hover {
-  color: #747bc9;
-  animation: glowGithub 1.5s infinite alternate;
-}
+    .skill-card {
+      background: rgba(39, 39, 68, 0.5);
+      border: 1px solid #360b3e;
+      border-radius: 10px;
+      padding: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
 
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5), 0 0 10px #f1c284;
+    }
 
-@keyframes popClick {
-  0% {
-    transform: scale(1);
-    filter: brightness(1);
-  }
-  30% {
-    transform: scale(1.4);
-    filter: brightness(1.8);
-  }
-  70% {
-    transform: scale(0.9);
-    filter: brightness(1.2);
-  }
-  100% {
-    transform: scale(1);
-    filter: brightness(1);
-  }
-}
+    .skill-card h4 {
+      font-size: 1.1em;
+      color: #fbf5ef;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
 
-.media-icons a:active {
-  transform: scale(1.3);     
-  filter: brightness(1.8);    
-  transition: transform 0.2s, filter 0.2s;
-}
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
 
+    .tag {
+      background: #f1c284;
+      color: #1c1c3a;
+      padding: 6px 15px;
+      border-radius: 20px;
+      font-size: 0.9em;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .tag:hover {
+      background: #c69fa5;
+      transform: scale(1.05);
+    }
+
+    .professional-skills {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .professional-skill-item {
+      background: rgba(39, 39, 68, 0.5);
+      border: 1px solid #360b3e;
+      border-radius: 10px;
+      padding: 30px 20px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .professional-skill-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5), 0 0 10px #f1c284;
+    }
+
+    .skill-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f1c284, #c69fa5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px rgba(241, 194, 132, 0.4);
+    }
+
+    .skill-icon i {
+      font-size: 2.2em;
+      color: #1c1c3a;
+    }
+
+    .professional-skill-item h4 {
+      font-size: 1.3em;
+      color: #fbf5ef;
+      margin: 0;
+      font-weight: 600;
+    }
+
+    .professional-skill-item p {
+      font-size: 0.95em;
+      color: #c69fa5;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    section .content p { color: #fbf5ef; font-size: 1.1em; }
+
+    /* --- RESPONSIVE STYLES --- */
     @media (max-width: 1040px) {
       header { padding: 12px 20px; }
-      .navigation { display: none; }
-      .navigation.active {
-        z-index: 889;
-        position: fixed;
-        background-color: #272744;
-        top: 0;
-        right: 0;
-        width: 380px;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-      }
-      .navigation a { font-size: 1.2em; margin: 10px; padding: 10px 40px; }
+      section { padding: 80px 20px; }
     }
 
     @media (max-width: 768px) {
       header {
         flex-direction: column;
         align-items: center;
-        justify-content: flex-start;
-        padding: clamp(30px, 5vh, 50px) clamp(15px, 5vw, 40px);
-        background: transparent;
+        gap: 15px;
+        padding: 15px;
+        background: rgba(39, 39, 68, 0.5);
+        backdrop-filter: blur(5px);
+      }
+      .navigation .nav-dot { width: 15px; height: 15px; }
+      .about .content { flex-direction: column; text-align: center; }
+      .about .text-content { text-align: center; }
+      
+      .skills-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
       }
 
-      .brand {
-        font-size: clamp(22px, 5vw, 32px);
-        margin: 0;
-      }
-
-      .navigation {
-        flex-direction: column;
-        gap: clamp(8px, 2vh, 12px);
-        margin-top: clamp(15px, 3vh, 25px);
-        align-items: center;
-      }
-
-      .navigation a {
-        font-size: clamp(14px, 4vw, 18px);
-        padding: clamp(6px, 2vh, 10px) clamp(10px, 3vw, 20px);
-        color: #000;
-      }
-
-      .main .content h2 { margin-bottom: 10px; }
-      .animated-text { margin-bottom: 20px; }
-      button {
-        font-size: clamp(15px, 4.5vw, 17px);
-        padding: clamp(0.45em, 1vw, 0.5em) clamp(1.3em, 2.5vw, 1.6em);
+      .professional-skills {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
-
   <header>
-    <a href="#" class="brand" data-aos="fade-in" data-aos-duration="1000">SALEH</a>
-    <div class="navigation">
-      <a href="#" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="100">Home</a>
-      <a href="#" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="200">About</a>
-      <a href="#" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="300">Skills</a>
-      <a href="#" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="400">Services</a>
-      <a href="#" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500">Work</a>
-      <a href="#" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="600">Contact</a>
-    </div>
+    <a href="#main" class="brand" data-aos="fade-in" data-aos-duration="1000">SALEH</a>
+    <nav class="navigation">
+        <label title="Home" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="100">
+          <input type="radio" name="nav-section" checked>
+          <a href="#main" class="nav-dot"></a>
+        </label>
+        <label title="About Me" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="200">
+          <input type="radio" name="nav-section">
+          <a href="#about" class="nav-dot"></a>
+        </label>
+        <label title="Skills" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="300">
+            <input type="radio" name="nav-section">
+            <a href="#skills" class="nav-dot"></a>
+        </label>
+        <label title="Services" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="400">
+            <input type="radio" name="nav-section">
+            <a href="#services" class="nav-dot"></a>
+        </label>
+        <label title="Contact" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="500">
+            <input type="radio" name="nav-section">
+            <a href="#contact" class="nav-dot"></a>
+        </label>
+    </nav>
   </header>
 
   <section class="main" id="main">
@@ -351,9 +443,161 @@ button:active {
     </div>
   </section>
 
+  <section class="about" id="about">
+    <div class="content">
+      <div class="text-content" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="400">
+        <h2 class="title">About Me</h2>
+        <p>I'm a passionate web developer with experience in creating dynamic and responsive websites. My goal is to build things that are both beautiful and functional.</p>
+      </div>
+      <div class="image-content" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="600">
+        <img src="image/image.png" alt="About Me Image">
+      </div>
+    </div>
+  </section>
+
+  <section class="skills" id="skills">
+    <div class="content">
+      <h2 class="title" data-aos="fade-up" data-aos-duration="1000">Skills</h2>
+      
+      <div class="skills-container">
+        <!-- Technical Skills Column -->
+        <div class="skills-column">
+          <div>
+            <div class="skills-column-title" data-aos="fade-right" data-aos-duration="800">
+              <i class="fas fa-code"></i>
+              <span>Technical Skills</span>
+            </div>
+            <div class="skills-divider"></div>
+          </div>
+
+          <div class="skill-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+            <h4>Programming Languages</h4>
+            <div class="skill-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Java</span>
+              <span class="tag">C++</span>
+              <span class="tag">PHP</span>
+              <span class="tag">JavaScript</span>
+            </div>
+          </div>
+
+          <div class="skill-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="150">
+            <h4>Web Development</h4>
+            <div class="skill-tags">
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">React</span>
+            </div>
+          </div>
+
+          <div class="skill-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+            <h4>Backend & Database</h4>
+            <div class="skill-tags">
+              <span class="tag">PHP + MySQL</span>
+              <span class="tag">XAMPP</span>
+              <span class="tag">SQL Queries</span>
+              <span class="tag">Node.js</span>
+            </div>
+          </div>
+
+          <div class="skill-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="250">
+            <h4>Tools & Frameworks</h4>
+            <div class="skill-tags">
+              <span class="tag">Android Studio</span>
+              <span class="tag">Git/GitHub</span>
+              <span class="tag">VS Code</span>
+              <span class="tag">Figma</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Professional Skills Column -->
+        <div class="skills-column">
+          <div>
+            <div class="skills-column-title" data-aos="fade-left" data-aos-duration="800">
+              <i class="fas fa-users"></i>
+              <span>Professional Skills</span>
+            </div>
+            <div class="skills-divider"></div>
+          </div>
+
+          <div class="professional-skills">
+            <div class="professional-skill-item" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+              <div class="skill-icon">
+                <i class="fas fa-handshake"></i>
+              </div>
+              <h4>Team Collaboration</h4>
+              <p>Experience working on group projects and app development teams</p>
+            </div>
+
+            <div class="professional-skill-item" data-aos="fade-up" data-aos-duration="800" data-aos-delay="150">
+              <div class="skill-icon">
+                <i class="fas fa-palette"></i>
+              </div>
+              <h4>Creative Design</h4>
+              <p>Blending technical skills with design aesthetics for premium interfaces</p>
+            </div>
+
+            <div class="professional-skill-item" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+              <div class="skill-icon">
+                <i class="fas fa-sync"></i>
+              </div>
+              <h4>Adaptability</h4>
+              <p>Quick learner open to exploring new technologies and methodologies</p>
+            </div>
+
+            <div class="professional-skill-item" data-aos="fade-up" data-aos-duration="800" data-aos-delay="250">
+              <div class="skill-icon">
+                <i class="fas fa-mobile-alt"></i>
+              </div>
+              <h4>UI/UX Passion</h4>
+              <p>Dedicated to creating clean, user-centered interface designs</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="content">
+      <h2 class="title" data-aos="fade-up" data-aos-duration="1000">Services</h2>
+      <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+        Offering web development, app development, and UI/UX design services to bring your ideas to life.
+      </p>
+    </div>
+  </section>
+
+  <section class="work" id="work">
+    <div class="content">
+      <h2 class="title" data-aos="fade-up" data-aos-duration="1000">Work</h2>
+      <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+        Check out my portfolio projects showcasing various technologies and creative solutions.
+      </p>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="content">
+      <h2 class="title" data-aos="fade-up" data-aos-duration="1000">Contact</h2>
+      <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+        Get in touch via email or social media. I'm always open to new opportunities and collaborations.
+      </p>
+    </div>
+  </section>
+
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
-    AOS.init();
+    AOS.init({
+        once: true,
+        mirror: false,
+    });
+
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+        header.classList.toggle('sticky', window.scrollY > 0);
+    });
   </script>
 </body>
 </html>
