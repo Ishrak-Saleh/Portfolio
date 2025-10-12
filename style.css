@@ -65,3 +65,22 @@ header.sticky {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     @extend .border-standard;
 }
+
+/* Custom styles for project cards based on role */
+.project-card .project-subtitle {
+    font-size: 0.85em;
+    margin: 0;
+    font-weight: 600; /* Increased from 500 to 600 for a bolder look */
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.project-card .role-frontend {
+    background: radial-gradient(100% 100% at 100% 0%, #fbf5ef 0%, #f2d3ab 100%);
+    color: #272744;
+}
+
+.project-card .role-fullstack {
+    background: radial-gradient(100% 100% at 100% 0%, #c69fa5 0%, #f1c284 100%);
+    color: #272744;
+}

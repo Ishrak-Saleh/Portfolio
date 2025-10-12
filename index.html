@@ -24,19 +24,16 @@
 
     body {
       width: 100%;
-      height: 100vh;
       overflow-x: hidden;
       background: #1c1c3a;
       position: relative;
       overflow-y: auto;
     }
 
-    /* Utility class for common border */
     .border-standard {
         border: 1px solid #360b3e;
     }
 
-    /* Fade in animation for page load */
     @keyframes fadeIn {
       from {
         opacity: 0;
@@ -46,7 +43,6 @@
       }
     }
 
-    /* Slide up animation */
     @keyframes slideUp {
       from {
         opacity: 0;
@@ -58,7 +54,18 @@
       }
     }
 
-    /* Fade in with stagger */
+    @keyframes glowPulse {
+      0% {
+        box-shadow: 0 0 5px #f2d3ab, 0 0 7px #c69fa5;
+      }
+      50% {
+        box-shadow: 0 0 1px #f2d3ab, 0 0 2px #c69fa5;
+      }
+      100% {
+        box-shadow: 0 0 5px #f2d3ab, 0 0 7px #c69fa5;
+      }
+    }
+
     header {
       animation: fadeIn 0.8s ease-in-out;
     }
@@ -160,9 +167,9 @@
     }
 
     @keyframes gradientMove {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+        0% { background-position: 50% 0%; }
+        50% { background-position: 50% 100%; }
+        100% { background-position: 50% 0%; }
     }
 
     .main .content {
@@ -213,48 +220,39 @@
       100% { margin-top: 0; }
     }
 
-    /* --- OTHER ELEMENTS --- */
+    /* --- BUTTON STYLES --- */
     button {
-      font-size: 20px;
-      font-weight: bold;
+      font-size: 18px;
       display: inline-block;
+      font-style: bold;
+      font-weight: 1000;
       outline: 0;
       border: 0;
       cursor: pointer;
-      background: radial-gradient(100% 100% at 100% 0%, #fbf5ef 0%, #c69fa5 100%);
-      box-shadow: 0px 0.2em 0.5em #00000069, inset 0px -0.05em 0.05em #272744;
-      padding: 0 2.5em;
+      will-change: box-shadow,transform;
+      background: radial-gradient( 100% 100% at 100% 0%, #fbf5ef 0%, #f2d3ab 100% );
+      box-shadow: 0px 0.01em 0.01em #272744, 0px 0.3em 0.7em -0.01em rgb(45 35 66 / 30%), inset 0px -0.01em 0px rgb(58 65 111 / 50%);
+      padding: 0 2em;
       border-radius: 0.3em;
       color: #272744;
-      height: 3em;
-      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
-      transition: box-shadow 0.4s ease, transform 0.15s ease;
+      height: 2.6em;
+      text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+      transition: box-shadow 0.15s ease, transform 0.15s ease;
       margin-top: 20px;
-      animation: slideUp 0.8s ease-in-out 0.5s both;
+      animation: fadeIn 0.8s ease-in-out 0.5s both;
     }
 
     button:hover {
-      transform: scale(1.5);
-      box-shadow: 0 0 10px #f2d3ab, 0 0 25px #c69fa5, 0 0 15px rgba(241, 194, 132, 0.4);
+      box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%), 0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.1em 0px #8b6d9c;
+      transform: translateY(-0.1em);
     }
 
     button:active {
-      transform: scale(0.98);
-      box-shadow: inset 0px 0.3em 0.7em rgba(0, 0, 0, 0.68);
+      box-shadow: inset 0px 0.1em 0.6em #392d41;
+      transform: translateY(0em);
     }
 
-    @keyframes glowPulse {
-      0% {
-        box-shadow: 0 0 5px #f2d3ab, 0 0 7px #c69fa5;
-      }
-      50% {
-        box-shadow: 0 0 1px #f2d3ab, 0 0 2px #c69fa5;
-      }
-      100% {
-        box-shadow: 0 0 5px #f2d3ab, 0 0 7px #c69fa5;
-      }
-    }
-
+    /* --- OTHER ELEMENTS --- */
     .media-icons {
       width: 100%;
       display: flex;
@@ -503,6 +501,110 @@
       font-size: 1.1em; 
     }
 
+    /* --- PROJECTS SECTION --- */
+    .projects .content {
+      max-width: 1200px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      width: 100%;
+      margin-top: 40px;
+    }
+
+    .project-card {
+      background: rgba(39, 39, 68, 0.3);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(241, 194, 132, 0.2);
+      border-radius: 20px;
+      padding: 30px 25px;
+      transition: all 0.3s ease;
+      animation: slideUp 0.8s ease-in-out forwards;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      min-height: 480px;
+    }
+
+    .project-card:nth-child(1) { animation-delay: 0.1s; }
+    .project-card:nth-child(2) { animation-delay: 0.15s; }
+    .project-card:nth-child(3) { animation-delay: 0.2s; }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      background: rgba(39, 39, 68, 0.5);
+      border-color: rgba(241, 194, 132, 0.4);
+      box-shadow: 0 8px 25px rgba(241, 194, 132, 0.2), 0 0 20px rgba(241, 194, 132, 0.1);
+    }
+
+    .project-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #f1c284, #c69fa5);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px rgba(241, 194, 132, 0.3);
+    }
+
+    .project-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 15px;
+    }
+
+    .project-card h3 {
+      font-size: 1.4em;
+      color: #fbf5ef;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .project-subtitle {
+      font-size: 0.85em;
+      color: #f1c284;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    .project-card p {
+      font-size: 0.95em;
+      color: #c69fa5;
+      margin: 0;
+      flex-grow: 1;
+      line-height: 1.5;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .project-tag {
+      background: rgba(241, 194, 132, 0.2);
+      color: #fbf5ef;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85em;
+      border: 1px solid rgba(241, 194, 132, 0.3);
+      transition: all 0.3s;
+    }
+
+    .project-tag:hover {
+      background: rgba(241, 194, 132, 0.3);
+      border-color: rgba(241, 194, 132, 0.5);
+    }
+
     /* --- CONTACT SECTION STYLES --- */
     .contact .content {
       display: flex;
@@ -526,14 +628,14 @@
       background: rgba(39, 39, 68, 0.5);
       border: 1px solid #360b3e;
       border-radius: 15px;
-      padding: 25px;
+      padding: 30px;
       display: flex;
       align-items: center;
       gap: 20px;
       transition: transform 0.3s, box-shadow 0.3s;
       width: 100%;
-      max-width: 350px;
-      min-height: 100px;
+      max-width: 420px;
+      min-height: 120px;
     }
 
     .contact-info-box:hover {
@@ -604,7 +706,6 @@
       }
       
       .skills-container {
-        grid-template-columns: 1fr;
         gap: 40px;
       }
 
@@ -613,7 +714,26 @@
       }
 
       .contact-info-container {
+        gap: 20px;
+      }
+
+      .contact-info-box {
+        max-width: 100%;
+      }
+
+      .projects-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      section .title {
+        font-size: 2em;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
   </style>
@@ -642,6 +762,7 @@
         <h3>Programmer</h3>
       </div>
       <button>Download CV</button>
+
       <div class="media-icons">
         <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
         <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
@@ -655,8 +776,8 @@
     <div class="content">
       <div class="text-content">
         <h2 class="title">About Me</h2>
-        <p>Hey! Call me Ishrak. I’m passionate about coding, problem-solving, and turning ideas into real projects. I enjoy building apps, creating smooth and responsive web experiences, and finding efficient solutions to tricky problems.
-I love learning new technologies and experimenting with different approaches, whether it’s designing a user-friendly interface, optimizing algorithms, or developing functional applications. For me, coding is not just work—it’s a way to create, explore, and grow.</p>
+        <p>Hey! Call me Ishrak. I'm passionate about coding, problem-solving, and turning ideas into real projects. I enjoy building apps, creating smooth and responsive web experiences, and finding efficient solutions to tricky problems.
+I love learning new technologies and experimenting with different approaches, whether it's designing a user-friendly interface, optimizing algorithms, or developing functional applications. For me, coding is not just workÃ¢â‚¬"it's a way to create, explore, and grow.</p>
       </div>
       <div class="image-content">
         <img src="image/image.png" alt="About Me Image">
@@ -669,7 +790,6 @@ I love learning new technologies and experimenting with different approaches, wh
       <h2 class="title">Skills</h2>
       
       <div class="skills-container">
-        <!-- Professional Skills Column -->
         <div class="skills-column">
           <div>
             <div class="skills-column-title">
@@ -722,7 +842,6 @@ I love learning new technologies and experimenting with different approaches, wh
           </div>
         </div>
 
-        <!-- Technical Skills Column -->
         <div class="skills-column">
           <div>
             <div class="skills-column-title">
@@ -750,7 +869,7 @@ I love learning new technologies and experimenting with different approaches, wh
                 <span class="tag">HTML5</span>
                 <span class="tag">CSS3</span>
                 <span class="tag">JavaScript</span>
-                <span class="tag">React</span>
+                <span class="tag">Flutter</span>
               </div>
             </div>
 
@@ -768,10 +887,11 @@ I love learning new technologies and experimenting with different approaches, wh
               <h4>Tools & Frameworks</h4>
               <div class="skill-tags">
                 <span class="tag">Android Studio</span>
-                <span class="tag">Git/GitHub</span>
-                <span class="tag">VS Code</span>
-                <span class="tag">Figma</span>
+                <span class="tag">tkinter</span>
+                <span class="tag">VS Code</span> 
                 <span class="tag">IntelliJ IDEA</span>
+                <span class="tag">Git/GitHub</span>
+                <span class="tag">Figma</span>
               </div>
             </div>
           </div>
@@ -780,12 +900,53 @@ I love learning new technologies and experimenting with different approaches, wh
     </div>
   </section>
 
-  <section class="services" id="services">
+  <section class="projects" id="services">
     <div class="content">
       <h2 class="title">Projects</h2>
-      <p>
-        Check out my portfolio projects showcasing various technologies and creative solutions.
-      </p>
+      
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-icon">
+            <img src="image/goti.png" alt="Music Player Icon">
+          </div>
+          <h3>Goti</h3>
+          <h1 class="project-subtitle role-frontend">Front-End Developer and UI/UX Designer</h1>
+          <p>An advanced peer-to-peer ride sharing system that is a work in progress. It features smooth and intuitive UI, options for both drivers and riders to create account, check for rides in real time with accurate money estimation. Integrated with Google Maps API for checking available drivers near you.</p>
+          <div class="project-tags">
+            <span class="project-tag">Java</span>
+            <span class="project-tag">Android Studio</span>
+            <span class="project-tag">Firebase</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-icon">
+            <img src="image/dripwear.png" alt="E-Commerce Platform Icon">
+          </div>
+          <h3>DripWear</h3>
+          <h1 class="project-subtitle role-fullstack">Full Stack Developer</h1>
+          <p>A full-stack e-commerce mockup with product catalog, shopping cart and a sorted database system for various clothings. Optimized for responsiveness and modern web technologies.</p>
+          <div class="project-tags">
+            <span class="project-tag">Java</span>
+            <span class="project-tag">Android Studio</span>
+            <span class="project-tag">Firebase</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-icon">
+            <img src="image/pharmavault.png" alt="Task Management App Icon">
+          </div>
+          <h3>PharmaVault</h3>
+          <h1 class="project-subtitle role-fullstack">Full Stack Developer</h1>
+          <p>An intuitive pharmacy inventory management application for organizing pharmaceuticals, medical tools and much more. Features file modification, categories, and real-time synchronization.</p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">tkinter</span>
+            <span class="project-tag">MySQL</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
