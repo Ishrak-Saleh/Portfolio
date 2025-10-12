@@ -13,7 +13,7 @@ body {
     overflow: hidden;
 }
 
-/* ===== HEADER ===== */
+/* Header */
 header {
     z-index: 889;
     position: fixed;
@@ -23,7 +23,7 @@ header {
     width: 100%;
     padding: 15px 200px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
     transition: 0.2s ease;
 }
@@ -33,32 +33,41 @@ header.sticky {
     padding: 10px 200px;
 }
 
-/* === BRAND WITH GRADIENT === */
 header .brand {
     background: linear-gradient(30deg, #f2d3ab, #fbf5ef);
+    margin-bottom: 10px;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 1.8em;
+    font-size: 2.5em;
     font-weight: 700;
     text-transform: uppercase;
     text-decoration: none;
 }
 
-header.navigation {
-    position: relative;
+header .navigation {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 header .navigation a {
-    color: #fbf5ef;
-    font-size: 1em;
     text-decoration: none;
+    color: #fbf5ef;
     font-weight: 500;
-    margin-left: 30px;
-    transition: 0.3s ease;
+    font-size: 1.2em;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: transparent;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
 }
 
 header .navigation a:hover {
-    color: #f2d3ab;
+    background-color: #f2d3ab;
+    color: #272744;
+    transform: scale(1.05);
 }
 
 header.sticky .navigation a {
@@ -69,7 +78,7 @@ header.sticky .navigation a:hover {
     color: #f2d3ab;
 }
 
-/* ===== MAIN SECTION ===== */
+/* Main Section */
 section {
     padding: 100px 200px;
 }
@@ -102,14 +111,13 @@ section {
     font-weight: 600;
 }
 
-/* ===== ANIMATED TEXT ===== */
+/* Animated Text */
 .animated-text {
     position: relative;
     height: 70px;
     overflow: hidden;
 }
 
-/* === ANIMATED TEXT WITH GRADIENT === */
 .animated-text h3 {
     background: linear-gradient(30deg, #f2d3ab, #fbf5ef);
     -webkit-background-clip: text;
@@ -140,7 +148,7 @@ section {
     100% { margin-top: 0px; }
 }
 
-/* ===== DOWNLOAD CV BUTTON (UPDATED) ===== */
+/* Download Button */
 .btn {
     border: none;
     color: #272744;
@@ -175,7 +183,7 @@ section {
     100% { box-shadow: 0 0 0 0 rgba(242, 211, 171, 0); }
 }
 
-/* ===== MEDIA ICONS ===== */
+/* Media Icons */
 .media-icons {
     margin-top: 50px;
 }
@@ -193,18 +201,25 @@ section {
 }
 
 .media-icons a.facebook:hover { color: #8a88f0; }
-.media-icons a.instagram:hover { color: #e5a8c9; }
-.media-icons a.twitter:hover { color: #a6d9f5; }
-.media-icons a.github:hover { color: #bdbdbd; }
+.media-icons a.instagram:hover { color: #ca84aa; }
+.media-icons a.twitter:hover { color: #84cff8; }
+.media-icons a.github:hover { color: #5c5c5c; }
 
-/* ===== RESPONSIVE DESIGN ===== */
-@media (max-width:1040px) {
+/* Responsive */
+@media (max-width: 1040px) {
     header {
         padding: 12px 20px;
+        flex-direction: column;
+        align-items: center;
     }
 
     header.sticky {
         padding: 10px 20px;
+    }
+
+    header .brand {
+        margin-bottom: 8px;
+        font-size: 2.5em;
     }
 
     header .navigation {
