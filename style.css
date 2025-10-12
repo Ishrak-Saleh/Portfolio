@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ===== HEADER ===== */
+header {
+    z-index: 889;
+    position: fixed;
+    background-color: rgba(251, 245, 239, 0.1);
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.2s ease;
+}
+
+header.sticky {
+    background-color: #272744;
+    padding: 10px 200px;
+}
+
+/* === BRAND WITH GRADIENT === */
+header .brand {
+    background: linear-gradient(30deg, #f2d3ab, #fbf5ef);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.8em;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+header.navigation {
+    position: relative;
+}
+
+header .navigation a {
+    color: #fbf5ef;
+    font-size: 1em;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 30px;
+    transition: 0.3s ease;
+}
+
+header .navigation a:hover {
+    color: #f2d3ab;
+}
+
+header.sticky .navigation a {
+    color: #fbf5ef;
+}
+
+header.sticky .navigation a:hover {
+    color: #f2d3ab;
+}
+
+/* ===== MAIN SECTION ===== */
+section {
+    padding: 100px 200px;
+}
+
+.main {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    background-image: url(image/bg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.main .content {
+    max-width: 800px;
+}
+
+.main .content h2 {
+    color: #fbf5ef;
+    font-size: 2em;
+    font-weight: 500;
+}
+
+.main .content h2 span {
+    font-size: 2.8rem;
+    font-weight: 600;
+}
+
+/* ===== ANIMATED TEXT ===== */
+.animated-text {
+    position: relative;
+    height: 70px;
+    overflow: hidden;
+}
+
+/* === ANIMATED TEXT WITH GRADIENT === */
+.animated-text h3 {
+    background: linear-gradient(30deg, #f2d3ab, #fbf5ef);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.5em;
+    font-weight: 700;
+    line-height: 70px;
+    letter-spacing: 1px;
+}
+
+.animated-text h3:nth-child(1) {
+    animation: text-move 12s infinite ease-in-out;
+}
+
+@keyframes text-move {
+    0% { margin-top: 0px; }
+    12.66% { margin-top: 0px; }
+    17.66% { margin-top: -70px; }
+    29.33% { margin-top: -70px; }
+    34.33% { margin-top: -140px; }
+    46% { margin-top: -140px; }
+    51% { margin-top: -210px; }
+    62.66% { margin-top: -210px; }
+    67.66% { margin-top: -140px; }
+    79.33% { margin-top: -140px; }
+    84.33% { margin-top: -70px; }
+    96% { margin-top: -70px; }
+    100% { margin-top: 0px; }
+}
+
+/* ===== DOWNLOAD CV BUTTON (UPDATED) ===== */
+.btn {
+    border: none;
+    color: #272744;
+    background-image: linear-gradient(30deg, #f2d3ab, #fbf5ef);
+    border-radius: 20px;
+    background-size: 200% 100%;
+    font-family: inherit;
+    font-size: clamp(14px, 1.2vw, 17px);
+    padding: clamp(0.35em, 0.8vw, 0.45em) clamp(1.2em, 2vw, 1.5em);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-position: right center;
+    animation: pulse512 1.5s infinite;
+}
+
+.btn:active {
+    background-image: linear-gradient(30deg, #8b6d9c, #8b6d9c);
+    color: #fff;
+    transform: scale(0.95);
+}
+
+@keyframes pulse512 {
+    0% { box-shadow: 0 0 0 0 #f2d3ab66; }
+    70% { box-shadow: 0 0 0 10px rgba(242, 211, 171, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(242, 211, 171, 0); }
+}
+
+/* ===== MEDIA ICONS ===== */
+.media-icons {
+    margin-top: 50px;
+}
+
+.media-icons a {
+    color: #fbf5ef;
+    font-size: 25px;
+    margin-right: 30px;
+    display: inline-block;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.media-icons a:hover {
+    transform: scale(1.2);
+}
+
+.media-icons a.facebook:hover { color: #8a88f0; }
+.media-icons a.instagram:hover { color: #e5a8c9; }
+.media-icons a.twitter:hover { color: #a6d9f5; }
+.media-icons a.github:hover { color: #bdbdbd; }
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width:1040px) {
+    header {
+        padding: 12px 20px;
+    }
+
+    header.sticky {
+        padding: 10px 20px;
+    }
+
+    header .navigation {
+        display: none;
+    }
+
+    header .navigation.active {
+        z-index: 889;
+        position: fixed;
+        background-color: #272744;
+        top: 0;
+        right: 0;
+        width: 380px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        box-shadow: 0 5px 25px rgba(1, 1, 1, 0.15);
+        transition: 0.3s ease;
+    }
+
+    header .navigation a {
+        color: #fbf5ef;
+        font-size: 1.2em;
+        margin: 10px;
+        padding: 10px 40px;
+    }
+
+    header .navigation a:hover {
+        background-color: #f2d3ab;
+        color: #272744;
+        transition: 0.3s ease;
+    }
+
+    section {
+        padding: 80px 20px;
+    }
+
+    .main .content h2 {
+        font-size: 1em;
+    }
+}
