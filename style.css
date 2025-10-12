@@ -32,6 +32,7 @@ header {
     transition: background 0.3s, padding 0.3s;
     /* ADDED: Subtle black shadow */
     box-shadow: 0 1px 10px rgba(0, 0, 0, 0.7); 
+    filter: blur(3px)
 }
 
 /* User requested sticky header color */
@@ -63,10 +64,8 @@ header .navigation {
     font-weight: 500;
     font-size: 1em;
     padding: 5px 0;
-    /* REMOVED: Default text-shadow/glow */
     text-shadow: none; 
     transition: all 0.3s;
-    /* Ensure links display as block/inline-block for padding/border to work on hover */
     display: inline-block;
     border-radius: 8px; /* For hover button appearance */
 }
@@ -74,16 +73,13 @@ header .navigation {
 /* Nav button hover state: look like the fixed-contact-btn without the glow/shadow */
 .navigation a:hover,
 .navigation a.active {
-    /* Background gradient from submit-button/fixed-contact-btn */
     background: linear-gradient(90deg, #f1c284, #c69fa5);
     color: #1c1c3a; /* Dark text for contrast */
     padding: 5px 15px; /* Added padding to mimic button size */
     transform: translateY(-2px); /* Subtle lift on hover */
-    /* REMOVED: Box-shadow/glow on hover as requested */
     box-shadow: none; 
     text-shadow: none;
 }
-
 
 /* Sections */
 section {
@@ -130,7 +126,6 @@ section.about .image-content img {
     border-radius: 50%; /* CIRCLE IMAGE */
     animation: glowImage 1.5s infinite alternate;
 }
-
 
 /* Section Titles (match animated text from homepage) */
 section .title {
@@ -431,14 +426,11 @@ section.contact .contact-container {
     font-size: 2em;
     margin-right: 20px;
     transition: color 0.3s, transform 0.3s, box-shadow 0.3s;
-    /* ADDED: Initial shadow for depth */
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); 
 }
 
-/* ADDED: Brighter glow on social media button click/active/focus */
 .social-icons a:active,
 .social-icons a:focus {
-    /* Use a brighter glow color */
     color: #f1c284; 
     text-shadow: 0 0 10px #f1c284, 0 0 20px #f1c284;
 }
@@ -446,7 +438,6 @@ section.contact .contact-container {
 .social-icons a:hover {
     color: #f1c284;
     transform: scale(1.1);
-    /* Keep initial hover subtle, the glow is reserved for active/focus */
     text-shadow: 0 0 5px #f1c284; 
 }
 
@@ -514,7 +505,6 @@ footer {
 }
 
 /* --- Media Queries --- */
-
 @media (max-width: 1024px) {
     section {
         padding: 80px 30px;
@@ -555,7 +545,6 @@ footer {
     }
     .navigation a {
         font-size: 0.8em;
-        /* Mobile adjustment for hover button appearance */
         padding: 5px 10px;
     }
     
