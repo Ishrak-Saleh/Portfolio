@@ -4,7 +4,6 @@ Built using **HTML, CSS, and Font Awesome**, it serves as my digital resume and 
 ---
 
 # Live Demo: https://ishrak-saleh.github.io/Portfolio/
----
 
 ## About
 This portfolio highlights:
@@ -35,4 +34,3 @@ Each section is cleanly animated and optimized for both desktop and mobile views
 3. Open `index.html` in your browser
 
 No dependencies or setup required, feel free to customize this portfolio for your own use.
----
