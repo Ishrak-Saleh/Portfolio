@@ -598,24 +598,33 @@ section .content p {
     border-color: rgba(241, 194, 132, 0.4);
     box-shadow: 0 8px 25px rgba(241, 194, 132, 0.2), 0 0 20px rgba(241, 194, 132, 0.1);
 }
-
-.project-icon {
-    width: 70px;
-    height: 70px;
-    background: linear-gradient(135deg, #f1c284, #c69fa5);
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 15px rgba(241, 194, 132, 0.3);
+/* Banner images for project cards */
+.project-banner {
+  width: 100%;
+  height: 180px; /* Adjust height to fit your banners */
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(241, 194, 132, 0.3);
+  margin-bottom: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.project-icon img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 15px;
+.project-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+  transition: transform 0.3s ease;
 }
+
+.project-banner:hover img {
+  transform: scale(1.05);
+}
+
+.project-card:hover .project-banner {
+  box-shadow: 0 0 30px rgba(241, 194, 132, 0.5);
+}
+
 
 .project-card h3 {
     font-size: 1.4em;
